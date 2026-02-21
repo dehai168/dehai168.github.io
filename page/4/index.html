@@ -156,6 +156,148 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-网页音频接口基本概念" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/09/%E7%BD%91%E9%A1%B5%E9%9F%B3%E9%A2%91%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">网页音频接口基本概念</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/09/%E7%BD%91%E9%A1%B5%E9%9F%B3%E9%A2%91%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="archive-article-date">
+  	<time datetime="2017-12-09T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="音频节点：模块化连接"><a href="#音频节点：模块化连接" class="headerlink" title="音频节点：模块化连接"></a>音频节点：模块化连接</h3><p>网页音频接口(Web Audio API)主要是 <em>音频环境(audio context)</em> 中进行音频处理，它允许模块间的连接。基本的音频处理在 <em>音频节点(audio node)</em> 当中执行，这些系欸但连接在一起形成了 <em>音频导向图(audio routing graph)</em>. 多个声源，甚至包含不同种类的声道，都可以在一个音频环境中进行处理。这种模块化的设计使得人们在创建复杂多变的声音特效时可以更加灵活。</p>
+<p>音频节点可以通过各自的输入与输出相连，形成一个 从一个或多个声源开始，经过处理节点，终止于末节点 的链式结构（有时你不需要末节点，比如你只是想数字化处理某些音频数据的时候）。一个简单、典型的网页音频接口的操作流程可以是这样的：</p>
+<ol>
+<li>创建一个音频环境</li>
+<li>在音频环境中，创建声源——例如 <code>&lt;audio&gt;</code> 标签，振动发声器(oscillator)，音频流</li>
+<li>创建特效节点——例如混响，双二阶滤波，声相控制，音频振幅压缩</li>
+<li>选择音频的终点——例如系统的扬声器</li>
+<li>连接声源和特效，以及特效和终点。</li>
+</ol>
+<p><img src="/img/2017-12-09/webaudioAPI_en.svg"></p>
+<p>每个输入和输出都可以包括几个声道，声道代表了一个特定的音效通道。各种声道分离结构都可以使用，包括单声道，立体声，四声道，5.1等等。</p>
+<p><img src="/img/2017-12-09/audionodes_en.svg"></p>
+<p>声源可以来自不同的地方：</p>
+<p>直接通过 Javascript 生成声音节点产生（例如一个振动发声器）<br>由脉冲编码调制产生的原始数据（音频环境中可以调用一些方法来解码部分支持的格式）<br>从 HTML 元素中（例如 <code>&lt;video&gt;</code> 或者 <code>&lt;audio&gt;</code> 标签）<br>直接通过一个 WebRTC MediaStream 获取流媒体（例如一个摄像头或麦克风）</p>
+<h3 id="音频数据：什么是样本"><a href="#音频数据：什么是样本" class="headerlink" title="音频数据：什么是样本"></a>音频数据：什么是样本</h3><p>当一个音频信号被处理时，取样意味着从一个连续的信号转化为离散的信号；更具体地说，一个连续的声波（例如一个正在演奏的乐队发出的声音）会被转化成一系列的样本点（一个时间上离散的信号），计算机只可以处理这些离散的样本块。</p>
+<p>更多的细节可以查看维基百科的采样页面。</p>
+<h3 id="音频片段：帧，样本和声道"><a href="#音频片段：帧，样本和声道" class="headerlink" title="音频片段：帧，样本和声道"></a>音频片段：帧，样本和声道</h3><p>一个音频片段(<code>AudioBuffer</code>) 会包含几个组成参数：一个或几个声道（1代表单声道，2代表立体声等等），一个长度（代表片段中采样帧的数目）和一个采样率（是每秒钟采样帧的个数）。</p>
+<p>每个样本点都是一个代表着该音频流在特定时间特定声道上的数值的单精度浮点数。一个帧，或者一个采样帧是由一组在特定时间上的所有声道的样本点组成的——即所有声道在同一时间的样本点（立体声有2个，5.1有6个等等，每个帧包含的样本点个数和声道数相同）。</p>
+<p>采样率就是一秒钟内获取帧的个数，单位是赫兹(Hz)。采样率越高，音频效果越好。</p>
+<p>现在让我们来看一下通道，一个单声道和一个立体声的音频片段，每个都是1秒钟，播放频率（采样率）为44100赫兹：</p>
+<ul>
+<li>单声道片段会有 44100 个样本点和 44100 个帧。长度属性为 44100 。</li>
+<li>立体声片段会有 88200 个样本点和 44100 个帧。长度属性依旧为 44100 ，因为长度总和帧的个数相同。</li>
+</ul>
+<p><img src="/img/2017-12-09/sampleframe.svg"></p>
+<p>当一个音频片段开始播放时，你将会听到最左侧的样本帧，之后是他右侧相邻的一帧，以此类推。在立体声中，你将会同时听到两个声道。样本帧的概念在此时非常有用，因为每个样本帧代表特定的播放时间，而和声道个数无关，这种方式很有利于精确的多声道同步处理。</p>
+<blockquote>
+<p>注意：只需用帧的数目除以采样率即可得到播放时间（单位为秒）。用样本点数目除以声道个数即可得到帧的数目。</p>
+</blockquote>
+<p>下面我们将展示几个浅显易懂的示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> context = <span class="keyword">new</span> <span class="title class_">AudioContext</span>();</span><br><span class="line"><span class="keyword">var</span> buffer = context.<span class="title function_">createBuffer</span>(<span class="number">2</span>, <span class="number">22050</span>, <span class="number">44100</span>);</span><br></pre></td></tr></table></figure>
+<p>如果你使用上面的方法调用，你将会得到一个立体声（两个声道）的音频片段(Buffer)，当它在一个频率为44100赫兹（这是目前大部分声卡处理声音的频率）的音频环境中播放的时候，会持续0.5秒：22050帧 &#x2F; 44100赫兹 &#x3D; 0.5 秒</p>
+<blockquote>
+<p>在数字音频中，44,100 赫兹 （有时也写作 44.1 kHz）是一个常见的取样频率。 为什么选取44.1kHz呢？首先，因为人耳的接收频率大约在 20 Hz 到 20,000 Hz之间，根据采样定理，采样频率一定要大于最终生成数据最大频率的二倍，因此就一定要大于40,000 Hz（即 40kHz）。不仅如此，在采样之前信号还必须通过低通滤波器 ，否则会发生混叠现象，一个理想低通滤波器会完全留下低于20kHz的信号（且没有使它衰减）并完美阻拦一切高于20kHz的信号，而事实上过度频带（英文）总是存在，在这个区域内信号会被部分衰减。这个频带越宽，建立一个抗混叠滤波器才越容易。因此我们选取44.1kHz允许我们有2.05kHz的空间预留给过度频带。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> context = <span class="keyword">new</span> <span class="title class_">AudioContext</span>();</span><br><span class="line"><span class="keyword">var</span> buffer = context.<span class="title function_">createBuffer</span>(<span class="number">1</span>, <span class="number">22050</span>, <span class="number">22050</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果你这样调用，你将会得到一个单声道的音频片段(Buffer)，当它在一个频率为44100赫兹的音频环境中播放的时候，将会被自动按照44100赫兹<em>重采样</em>（因此也会转化为44100赫兹的片段），并持续1秒：44100帧 &#x2F; 44100赫兹 &#x3D; 1秒。</p>
+<blockquote>
+<p>注意：音频重采样与图片的缩放非常类似：比如你有一个16 x 16的图像，但是你想把它填充到一个32 x 32大小的区域，你就要对它进行缩放（重采样）。得到的结果会是一个叫低品质的（图像会模糊或者有锯齿形的边缘，这取决于缩放采用的算法），但它却是能将原图形缩放，并且缩放后的图像占用空间比相同大小的普通图像要小。重新采样的音频道理相同——你会介于一些空间，但事实上你无法产出高频率的声音（高音区）。</p>
+</blockquote>
+<h4 id="分离式与交错式音频片段"><a href="#分离式与交错式音频片段" class="headerlink" title="分离式与交错式音频片段"></a>分离式与交错式音频片段</h4><p>网页音频接口使用了分离式的片段储存方式：左(L)右(R)声道像这样存储：</p>
+<p><code>LLLLLLLLLLLLLLLLRRRRRRRRRRRRRRRR （对于一个有16帧的音频片段）</code></p>
+<p>这种储存方式在音频处理中非常常见：这种方式允许对每个声道单独处理。另一种储存方式是使用交错式的片段储存方式：</p>
+<p><code>LRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLR （对于一个有16帧的音频片段）</code></p>
+<p>这种方式在存储以及播放音频等不需要音频加工的操作中非常常见，例如一个解码后的MP3流媒体。<br>在开发者接触到的网页音频接口中只有分离式音频片段，因为它主要用于音频加工。在处理过程中它使用分离式，但是当它传送到声卡中用于播放时，音频片段会被转化为交错式。反过来，当MP3被解码时，初始状态它是交错式的，但是他会被转化成分离式以用于音频加工。</p>
+<h3 id="声道"><a href="#声道" class="headerlink" title="声道"></a>声道</h3><p>不同的音频片段可能包含不同数量的声道个数，从基本的单声道（只有一个声道），立体声（左右两个声道），到更加复杂的四声道，5.1。由于每个声道中包含的音频数据可以不同，因此声道越多听觉效果越好。在不同声道模式中，表示特定声道的缩写如下表所示：</p>
+<p><img src="/img/2017-12-09/table0.png"></p>
+<h4 id="向上和向下混频"><a href="#向上和向下混频" class="headerlink" title="向上和向下混频"></a>向上和向下混频</h4><p>当输入与输出的声道数不同时，我们就需要按照如下方法进行混频。这些封装好的方法可以通过设置声音节点的 <code>AudioNode.channelInterpretation</code> 属性为 <code>&quot;speakers&quot;</code>（扬声器） 或 <code>&quot;discrete&quot;</code>（离散声道） 进行混频。</p>
+<p><img src="/img/2017-12-09/table1.png"><br><img src="/img/2017-12-09/table2.png"><br><img src="/img/2017-12-09/table3.png"><br><img src="/img/2017-12-09/table4.png"><br><img src="/img/2017-12-09/table5.png"></p>
+<h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><p>一般来说，可视化是通过获取各个时间上的音频数据（通常是振幅或频率），之后运用图像技术将其处理为视觉输出（例如一个图像）来实现的。网页音频接口提供了一个不会改变输入信号的音频节点 <code>AnalyserNode</code>，通过它可以获取声音数据并传递到像 <code>&lt;canvas&gt;</code> 等等一样的可视化工具。</p>
+<p><img src="/img/2017-12-09/fttaudiodata_en.svg"></p>
+<p>你可以通过如下方法获取需要的音频数据：</p>
+<p><code>AnalyserNode.getFloatFrequencyData()</code><br>返回一个<code>Float32Array</code> 数组，其中包含传递到此音频节点声音的实时频率数据。<br><code>AnalyserNode.getByteFrequencyData()</code><br>返回一个<code>Uint8Array</code> 无符号字节数组<code>(unsigned byte array)</code>，其中包含传递到此音频节点声音的实时频率数据。<br><code>AnalyserNode.getFloatTimeDomainData()</code><br>返回一个<code>Float32Array</code> 数组，其中包含传递到此音频节点声音的实时波形，时间数据。<br><code>AnalyserNode.getByteTimeDomainData()</code><br>返回一个<code>Uint8Array</code> 无符号字节数组<code>(unsigned byte array)</code>，其中包含传递到此音频节点声音的实时波形，时间数据。</p>
+<blockquote>
+<p>注意： 更多信息可以参考我们的这篇文章：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API">基于Web Audio API实现音频可视化效果</a> 。</p>
+</blockquote>
+<h3 id="空间位置化"><a href="#空间位置化" class="headerlink" title="空间位置化"></a>空间位置化</h3><p>音频的空间化（由网页音频接口的 <code>PannerNode</code> 和 <code>AudioListener</code> 节点处理）允许我们对空间中某一点的音频信号，以及这一信号的接听者建立位置和行为模型。</p>
+<p>声相控制器的位置可以通过笛卡尔坐标系进行描述，控制器的运动可以由速度向量来表示，这会引起多普勒效应，它的传播方向可以用一个方向圆锥来表示，当它是一个全方向声源时，圆锥会变得非常大。</p>
+<p><img src="/img/2017-12-09/pannernode_en.svg"></p>
+<p>接听者的位置可以用笛卡尔坐标系来表示；他的运动可以用方向向量表示；头部姿态可以用两个向量表示：一个向上向量表示头顶正对的方向，一个向前向量表示鼻子所指向的方向（面向的方向），这两个向量应该互相垂直。</p>
+<p><img src="/img/2017-12-09/listener.svg"></p>
+<h3 id="扇入与扇出"><a href="#扇入与扇出" class="headerlink" title="扇入与扇出"></a>扇入与扇出</h3><p>对于音频来说，扇入是指 <code>ChannelMergerNode</code>  节点接收一系列单声道输入声源，并将它们整合输出为一个多声道音频信号的过程：</p>
+<p><img src="/img/2017-12-09/fanin.svg"></p>
+<p>扇出恰恰相反，是指一个 <code>ChannelSplitterNode</code> 节点接收一个多声道输入声源并将它分离成多个单声道音频信号的过程：</p>
+<p><img src="/img/2017-12-09/fanout.svg"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API/Basic_concepts_behind_Web_Audio_API">原文链接</a></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/09/%E7%BD%91%E9%A1%B5%E9%9F%B3%E9%A2%91%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-初识electron" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -725,15 +867,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生日</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">36</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">

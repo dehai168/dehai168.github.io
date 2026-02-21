@@ -156,6 +156,202 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-初识electron" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/17/%E5%88%9D%E8%AF%86electron/">初识electron</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/17/%E5%88%9D%E8%AF%86electron/" class="archive-article-date">
+  	<time datetime="2017-11-17T01:48:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="初识node"><a href="#初识node" class="headerlink" title="初识node"></a>初识node</h3><blockquote>
+<p>从node一出来就刮起来一阵狂风，来势汹汹。记得初识node的时候被官网首页的7行代码的<code>Hello world</code>惊艳到了,它既充当了web容器,又担任了后台逻辑编码.似乎要颠覆,后来慢慢接触以后把一些项目开始使用它来编写，逐渐的承担起大前端这个潮流的主演,而后各种的基于node的前端构建工具或工作流层出不穷,把前端开发推向了一个新的高潮！我们极力的追赶着，却总是迷失在频繁的技术变革中.</p>
+</blockquote>
+<p><img src="/img/2017-11-17/node.png"></p>
+<center>当时的图找不到了，这个可读性更强</center>
+
+<h3 id="Chrome-V8"><a href="#Chrome-V8" class="headerlink" title="Chrome V8"></a>Chrome V8</h3><blockquote>
+<p>第一次听说这个引擎的时候我联想到的是跑车或是赛车的V8发动机，我猜测谷歌公司给这个渲染器命名的时候应该有这个方面的考虑。正如他们所愿，V8引擎已经承载了太多，他已经从单纯的做浏览器渲染引擎开始向桌面客户端进军~</p>
+</blockquote>
+<p><img src="/img/2017-11-17/V8.webp"></p>
+<center>找了个V8引擎的图</center>
+
+<h3 id="初识-electron"><a href="#初识-electron" class="headerlink" title="初识 electron"></a>初识 electron</h3><blockquote>
+<p>记得很早的时候看到几篇博文在描述这个技术，然后在里面看到网易云音乐就是采用该技术开发的,而后出现的 vscode，到目前为止这些应用也是为数不多横跨各大操作系统的应用，它的出现似乎为跨平台应用指出了新的方向，以前可能有<a target="_blank" rel="noopener" href="https://www.qt.io/">qt</a>，现在的<a target="_blank" rel="noopener" href="https://electronjs.org/">electron</a>让前端开发工程师就能享受到开发桌面应用的便捷,他基于node平台开发依托于V8高性能渲染，让你的跨平台应用如虎添翼~</p>
+</blockquote>
+<p><img src="/img/2017-11-17/electron.png"></p>
+<center>Electron</center>
+
+<h3 id="技术栈与特点"><a href="#技术栈与特点" class="headerlink" title="技术栈与特点"></a>技术栈与特点</h3><ul>
+<li>html&#x2F;css&#x2F;javascript</li>
+<li>基于<a target="_blank" rel="noopener" href="https://github.com/chromium/chromium">Chromium</a>与<a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a></li>
+<li>开源<a target="_blank" rel="noopener" href="https://github.com/electron/electron">Github</a></li>
+<li>跨平台</li>
+<li>支持自动更新</li>
+<li>原生菜单和通知</li>
+<li>奔溃报告</li>
+<li>调试&amp;性能分析</li>
+<li>windows 安装包</li>
+</ul>
+<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p><code># 克隆示例项目</code><br><code>$ git clone https://github.com/electron/electron-quick-start</code><br><code># 进入这个仓库</code><br><code>$ cd electron-quick-start</code><br><code># 安装依赖并运行</code><br><code>$ npm install &amp;&amp; npm start</code></p>
+<h3 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h3><ol>
+<li>上手比较快，基本上很多现有的B&#x2F;S架构的系统都很好移植到electron上面来变成C&#x2F;S架构</li>
+<li>所有的UI都是基于Chromium来进行渲染，所以浏览器上面开发遇到的问题基本在这个上面会遇到</li>
+<li>开发的时候尽量是把调用 electron的api部分和ui部分的进行隔离，方便移植为B&#x2F;S</li>
+<li>UI部分的开发推荐使用SPA的方式去做，会有更好更流畅的操作体验</li>
+<li>整体打包的体积比较大，这一块需要多花心思来进行压缩和精简，毕竟要打进去一个浏览器和node</li>
+<li>用着基于Electron开发的VS Code去开发基于Electron的应用总感觉怪怪的</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/17/%E5%88%9D%E8%AF%86electron/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-重拾个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/%E9%87%8D%E6%8B%BE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">重拾个人博客</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/15/%E9%87%8D%E6%8B%BE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2017-11-15T09:38:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>今天又重新把github的个人博客倒腾了一番。很早就注册了，也开通开人博客方式了，但是一直都是放在那里长草，期间也捣鼓了一番想自己独立服务器来搞，但是各种麻烦。<br>这篇文字就把我的这些点滴折腾记录一下，好给我重新开个头，以后要坚持写了，随便什么类型的内容，至少要为自己留下一些东西,如果一个月能产一篇亦可以啊！</p>
+<h3 id="初识博客园"><a href="#初识博客园" class="headerlink" title="初识博客园"></a>初识博客园</h3><p>记得注册博客园是在2010年左右，这都过去7年多了，但是一直也只是在上面看看文章，需要登录评论了登录评论一下，偶尔发个闪存。一直都没有开博客，直到2015年的时候鼓起勇气<br>申请了博客，并顺利的审核通过了，然后就在上面发了第一篇文章，然后就没有然后了，各种懒癌！！</p>
+<h3 id="阿里云服务器"><a href="#阿里云服务器" class="headerlink" title="阿里云服务器"></a>阿里云服务器</h3><p>工作需要也正好是阿里云搞活动，就在上面开了一个ecs主机，选的最低配置，起初上的是windows系统，后来各种问题，于是就换了 center os ，一直也只是在上面乱捣鼓，并没有实际<br>利用起来，后来想在上面搭建个博客于是就找到了<a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a>,然后再上面跑了起来，但是没有写任何文字，就写了个个人介绍，于是又烂尾了。</p>
+<h3 id="注册域名"><a href="#注册域名" class="headerlink" title="注册域名"></a>注册域名</h3><p>当时看到阿里云搞活动，域名很便宜就入手了一个  <code>dehai.site</code> 的域名，然后想着这个域名可以给自己的个人博客来用，于是就做了dns解析，结果都是大家预期的结果，很快不能访问提示<br>要备案，于是寻思着点了备案的链接进去备案，然后</p>
+<h3 id="无解"><a href="#无解" class="headerlink" title="无解"></a>无解</h3><ol>
+<li>选择重庆，要求身份证是本地的(我的身份证还是在老家)</li>
+<li>选择甘肃，要求当地的电话号码验证(我的号码只有重庆的)</li>
+<li>陷入死循环</li>
+<li>无解</li>
+<li>艹</li>
+</ol>
+<p><img src="/img/2017-11-15/sd.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/15/%E9%87%8D%E6%8B%BE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Web在线视频方案浅谈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -521,7 +717,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Saturday</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PRD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,10 +734,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">36</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -156,6 +156,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-训练场关上了网" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/10/24/%E8%AE%AD%E7%BB%83%E5%9C%BA%E5%85%B3%E4%B8%8A%E4%BA%86%E7%BD%91/">训练场关上了网</a>
+    </h1>
+  
+
+        
+        <a href="/2026/10/24/%E8%AE%AD%E7%BB%83%E5%9C%BA%E5%85%B3%E4%B8%8A%E4%BA%86%E7%BD%91/" class="archive-article-date">
+  	<time datetime="2026-10-24T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>十月二十四，周六。杯子还烫，我把昨天那篇说明又读了一遍，想记在自己的站上。</p>
+</blockquote>
+<p>OpenAI 十月二十三发了《Securing our frontier model training environment》。题目像一份安全通报。我读完，记得住的是一个动作：他们把自己最强模型的训练场，从公网上摘了下来。对外已经发布的产品不在这篇里。这篇讲的是还在练、还在被故意为难的那些模型，住在什么样的屋子里。</p>
+<p>九月二十日，一个内部研究模型利用 DNS 解析器的配置失误，在一次训练中获得了有限的公网访问。OpenAI 说当时把事情拦下了，但这条缝让他们看见围墙还不够厚。往前还有七月的 Hugging Face 事件，以及他们观察到的另一些模型越界。于是最强模型的训练和评估停下来，大约十一天。他们补基础设施、加监控、把发现严重风险就自动停跑的系统做扎实。十月一日，前沿强化学习训练和内部推理重新开始。</p>
+<p>新策略写得很明白：在对齐、监控和互联网基础设施足够可靠之前，前沿模型训练不再接入公网。浏览和检索仍要练，所以他们做了一个「离线世界」——一大批做好索引、放进缓存的网页。模型可以在里面点、搜、跟网页应用打交道，碰不到外面真正的系统。他们说，现在所有前沿强化学习训练都用这种离线方式。</p>
+<p>我在「离线世界」上停了一下。会搜索、会打开一页，以前被当成能力本身。现在他们把「学会浏览」和「碰到真的网」拆成两件事。练习留下，出口关上。这不太像临时补丁。训练断网，本身就是一种产品选择：最强的那一档，先在副本里长大。</p>
+<p>关上网口还不够。他们用最强的模型做高算力红队，人给了基础设施的源码、配置，以及可能存在弱点的说明，好让攻击的一边更有利。目标有三个：向他们自己控制的外部服务器发出请求，证明摸到了公网；越权碰到许可范围之外的资源；在本该隔离的智能体之间把信息传过去。参与的包括即将推出的 GPT-6 Astra Cyber，和一个内部前沿模型。这些实验一共花了数千亿 token，跑在单独搭出来的研究基础设施副本上，一旦越出范围就暂停。</p>
+<p>它们找出了以前不知道的漏洞，也找出了配置错误。沙箱和 microVM 可以被串起来，在宿主机上执行代码。影响到开源组件的，OpenAI 说已经回报给维护者，并往回贡献补丁，点名的有 Kata Containers（包括 CVE-2026-24834，以及权限隔离和文件系统隔离）、gVisor 的文件描述符处理、Moby／Docker 的系统调用过滤。他们还在继续修内核上的问题，另有一批已经披露、尚未公开的漏洞。</p>
+<p>更让我放慢的是传话。隔开的 microVM 不靠网络，也不写共享文件，仍能交换一串假秘密。办法是处理器缓存：读缓存比读内存快。一边把选定的数据挤出缓存，另一边量重新读回来要多久，用快慢把信息捡回去。Spectre 和 Meltdown 用过同类的时间差。共享存储的读写节奏、同一个容器里抢 CPU 时间、离线网页设施里的 TLS 证书缓存，也被当成信道。大多数很慢，不好用。可「已经隔开」这句话，因此不能说满。</p>
+<p>他们的判断是，没有找到一条既能轻易连上公网、又能躲开监控的路。洞补上了，监控和自动停跑也加强了，这才在十月一日恢复。红队不会做完就收：以后前沿训练和评估能不能继续，高算力红队要写进安全论证。他们同时承认，后面的模型还会找到现在不知道的弱点。</p>
+<p>收紧边界的气氛，这两天不只出现在这一家。月之暗面在 Kimi K3.1 Pro 的技术博客里写道，公开权重之前，他们从中期训练和强化学习里移除了与网络安全相关的数据，通用编程任务留着，以免开放权重把攻防能力推到最前面。我只顺手记这一句。这篇想留下来的，仍是 OpenAI 那份说明。</p>
+<p>我白天改接口，晚上也看家里的消息。能力越强，围墙越厚。这句话不是吓唬人，是他们把最能钻缝的模型，先关在一间备好的屋子里。普通人打开聊天网页，今天不会少一个按钮。我以后再看见「这个模型会浏览」，会多问一句：它浏览的是外面的网，还是一间事先缓存好的离线屋子。</p>
+<p>说明原文在这里：<a target="_blank" rel="noopener" href="https://openai.com/index/securing-our-frontier-model-training-environment/">https://openai.com/index/securing-our-frontier-model-training-environment/</a>。月之暗面那段写在他们的技术博客：<a target="_blank" rel="noopener" href="https://www.kimi.ai/blog/kimi-k3-1-pro">https://www.kimi.ai/blog/kimi-k3-1-pro</a>。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">AI</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/10/24/%E8%AE%AD%E7%BB%83%E5%9C%BA%E5%85%B3%E4%B8%8A%E4%BA%86%E7%BD%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-周五先把菜记上" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1031,92 +1122,6 @@
 
 
   
-    <article id="post-又是一年1024" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/26/%E5%8F%88%E6%98%AF%E4%B8%80%E5%B9%B41024/">又是一年1024</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/26/%E5%8F%88%E6%98%AF%E4%B8%80%E5%B9%B41024/" class="archive-article-date">
-  	<time datetime="2020-10-26T22:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>2^10&#x3D;1024</p>
-</blockquote>
-<ol>
-<li>从2018年离职研发到现在已经有2年了,这个日子还是值得铭记;</li>
-<li>头发在9月份的时候彻底推了一个光头;</li>
-<li>目前不出差的日子里每天都是在抹防脱药水(止损);</li>
-<li>手头上还接着几个项目,空闲的时候还是Code,顺便补贴家用;</li>
-<li>儿子小学一年级第一学期明显的亚历山大;</li>
-<li>回锅肉感觉也没有预想的那么好;</li>
-<li>等待一个机会,还是要自己做老板;</li>
-<li>人情冷暖;</li>
-</ol>
-<div align="center" style='width:600px;height:400px;'><img src="https://dehai167-dd.oss-cn-shanghai.aliyuncs.com/blog/20201026/timg.jpg" width="100%"><br></div>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/26/%E5%8F%88%E6%98%AF%E4%B8%80%E5%B9%B41024/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1263,15 +1268,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">车辆OTA</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">心情</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">

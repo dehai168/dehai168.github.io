@@ -156,6 +156,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-技能标准换了房东" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/10/26/%E6%8A%80%E8%83%BD%E6%A0%87%E5%87%86%E6%8D%A2%E4%BA%86%E6%88%BF%E4%B8%9C/">技能标准换了房东</a>
+    </h1>
+  
+
+        
+        <a href="/2026/10/26/%E6%8A%80%E8%83%BD%E6%A0%87%E5%87%86%E6%8D%A2%E4%BA%86%E6%88%BF%E4%B8%9C/" class="archive-article-date">
+  	<time datetime="2026-10-26T08:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>十月二十六，周一。重庆这边天刚亮透，我在桌边把两篇公告对着读完，杯子还温着。</p>
+</blockquote>
+<p>Anthropic 十月二十二写了一篇不长的说明：把 Agent Skills 这个开源标准，捐给 Linux Foundation 下面的 Agentic AI Foundation，简称 AAIF。同一天，AAIF 自己也发了新闻，宣布收下四个新项目。我来回看了两遍，怕把「捐出去」读成「不能用了」。</p>
+<p>一个 skill 就是一个文件夹。里面放一份 <code>SKILL.md</code>，教代理去做某一件任务，或进入某一个领域，旁边再放它需要的脚本和参考材料。这套东西是他们做 Claude Code 时摸出来的。Claude Code 应付一般的知识活还行，真碰到业务里一步一步的手续，常常缺那份「具体怎么做」。2025 年十月，技能先在 Claude Code 里用起来。几个星期里，开发者就在 GitHub 上发出了几千个，也有人为 Codex、Cursor、OpenCode 写了加载器。2025 年十二月，Agent Skills 作为开放标准发布，单独备了 GitHub 组织和域名，好让别的代理也能接。</p>
+<p>数字我照 Anthropic 的原文记。自标准发布以来，已有超过 70 个代理平台接入，官方点名的包括 ChatGPT、Cursor、GitHub Copilot、VS Code。到目前为止，开发者发布了约 100 万个 skills，安装约 2.8 亿次。原文写的是 1 million skills，nearly 280 million installed。我没有自己去数仓库，就当他们报上来的账。</p>
+<p>捐出去的清单也很具体：Agent Skills 的名称和 logo、GitHub organization，还有 agentskills.io 这个域名。Anthropic 写明，你可以继续使用，也可以继续贡献，不必加入 AAIF。文件夹还在原处。换掉的是门牌挂在谁家门口，下一步由谁来拍板。</p>
+<p>AAIF 是 Anthropic、Block、OpenAI 去年共同发起的。在这之前，Anthropic 已经把 MCP（Model Context Protocol）捐给了它。这次维护者仍以个人身份参与。Lead Maintainers 是 David Soria Parra 和 Mahesh Murag，工程师来自 Anthropic、Google、OpenAI 等公司。名字我照抄，不替任何一家站台。</p>
+<p>他们提出的后续路线图，眼下还是提案，不是已经生效的规矩：带版本的发布、正式的提案流程，以及给编写和安装 skill 的人一份安全指引。规范仍放在 agentskills.io。想对规格的改动提意见，可以去项目的 Discord。提案写在纸上，和规矩已经落地，是两回事。我分开记。</p>
+<p>AAIF 同一天的新闻把范围又铺开了一层。新增的四个项目是：Anthropic 的 Agent Skills，OpenAI 的 Open Responses，Hugging Face 的 OpenEnv，阿里的 OpenSandbox。基金会从成立时的 3 个项目，增加到 10 个。稿子写，成立时那 3 个是 2025 年十二月放进去的。四个新名字各占一层：代理怎么获得能力，应用怎么跨着供应商跟模型说话，代理在哪儿训练和评估，又在哪儿安全地运行。我没有把每一层的接口拆开。留下来的是这件事的形状：同一天，四家公司把自己的一块，交到同一个中立治理下面。</p>
+<p>我读完，在「房东」这两个字上停了一下。「技能」原先是一家公司里长出来的格式。现在它挂到基金会门口，变成一块公共门牌。普通人今天打开聊天网页，不会因此多出一个按钮。要写 skill、把目录接到 Cursor 或 GitHub Copilot 上的人，关心的是另一句：这套规范，还会不会被一家公司单方面改掉。捐出去，就是把拍板的桌子从一间办公室搬开。桌子搬了，不等于每份提案都会被好好读完。维护者以个人身份进来，公司的名字仍写在履历旁边。中立是一种安排，要看以后的提案实际怎么过。</p>
+<p>能跨着产品用，是这件事值得记下来的原因。可文件夹里不只有说明，还有脚本。脚本是会跑的。装别人的 skill 之前，我打算多看一眼：它要读哪些文件，要往哪儿发请求，参考材料里有没有把不该带出去的东西写进去。路线图里那份安全指引，我当成他们也看见了这条缝，不当成缝已经补好。</p>
+<p>门牌换了房东。文件夹长什么样，今天还没变。链接我存下来，周一要改的接口还在编辑器里等着。</p>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><ul>
+<li>Anthropic：《Donating Agent Skills to the Agentic AI Foundation》（2026-10-22）<br><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation</a></li>
+<li>Agentic AI Foundation：《Agentic AI Foundation Announces Four New Projects: Agent Skills, Open Responses, OpenEnv, and OpenSandbox》（2026-10-22）<br><a target="_blank" rel="noopener" href="https://aaif.io/news/agentic-ai-foundation-announces-four-new-projects">https://aaif.io/news/agentic-ai-foundation-announces-four-new-projects</a></li>
+<li>Agent Skills 规范<br><a target="_blank" rel="noopener" href="https://agentskills.io/">https://agentskills.io</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">AI</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">资讯</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/10/26/%E6%8A%80%E8%83%BD%E6%A0%87%E5%87%86%E6%8D%A2%E4%BA%86%E6%88%BF%E4%B8%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-把闹钟往后拨半小时" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1034,93 +1133,6 @@
 
 
   
-    <article id="post-写给36岁的我" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/10/08/%E5%86%99%E7%BB%9936%E5%B2%81%E7%9A%84%E6%88%91/">写给36岁的我</a>
-    </h1>
-  
-
-        
-        <a href="/2023/10/08/%E5%86%99%E7%BB%9936%E5%B2%81%E7%9A%84%E6%88%91/" class="archive-article-date">
-  	<time datetime="2023-10-08T15:05:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>今天是我36岁的生日,是一个比较特殊的日子，好久没有写博客了，刚好今天也不是很忙于是就打开笔记本写几句</p>
-</blockquote>
-<h3 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h3><p>  一开始我是把工作排在了第一,后来想了想感觉不合适,于是还是把工作放到了第二个主题，毕竟工作是为了更好的生活。这个生日的时间比较特殊，刚好在中秋和国庆假期之后，也没有刻意的安排去哪里庆祝，毕竟这么多年了都是简单度过，早上给老妈说了晚上下班回去吃饭，昨天晚上和老婆商量好了今天就在家里吃饭,一家人在一起比啥都强，再说了可以带着小蛋糕回家让儿子吃，他肯定很高兴。当然今天还是非常感谢我老婆送花给我，下面这张照片就是今天的花的照片。</p>
-<img src="https://dehai167-dd.oss-cn-shanghai.aliyuncs.com/blog/20231008/IMG_3795.JPG" width="400px" height="600px">
-
-<p>  有件事情我必须要在这里提一下,就是浩辰今年已经4年级了。昨天他们班主任让他们用一种动物来形容自己的家庭成员，于是乎下午下班回家我们都追着询问他分别给我们是如何描述的，结局出乎人的意料，他说他写的妈妈是🐯(雌)😂🤣🤣🤣🤣🤣,爸爸是自恋的丹顶鹤,奶奶是🐈。这个结果我们足足笑了半个小时,他还声情并茂的简要描述了下小作文内容，让人啼笑皆非，遗憾的是描述他妈妈的前半段没有录下来，只录了后半段和其他两个人的。<br>  微电园的新房子还在装修中,装修的事情我老婆还是鞠躬尽瘁，我确实自叹不如，等到装修好以后我们可能会根据情况搬过去住，一方面现在小孩子大了肯定不能还是和我们在一起住，现在的房子着实有点小了；另一个方面就是浩辰到时候如果考不上小区跟前的巴蜀科学城中学，那么只能是划片区去上重师附中，那到时候就要去富力城那边，这样一来我们就打算把现在的龙湖的房子卖了，重新在富力城那边租个房子让他爷爷奶奶伺候他上初中和高中。<br>  我最近在读《埃隆马斯克传》，书还没有读完但是给我的整体感受就是传奇的人物一生真的是不简单，不管是他个人脾性还是生活阅历还是周遭环境，真的是很多条件和因素综合起来才造就了他,附上别人总结好的内容。</p>
-<img src="https://dehai167-dd.oss-cn-shanghai.aliyuncs.com/blog/20231008/IMG_3792.JPG" width="600px" height="400px">
-
-<h3 id="关于工作"><a href="#关于工作" class="headerlink" title="关于工作"></a>关于工作</h3><p>  从几年的8月1号来算，我从创业开始已经足足2年时间了，我记得我上一篇博文就是写在创业之时。从目前整体情况来看，情况在逐渐好转中，第一年确实是在不断的摸索方向，试错，交学费的过程，现在回过头来看我们发现还是干自己的老本行比较有优势，虽然现在整体账面上还是亏损的，但是现在签订的研发合同还是有好多个，订单必然不会久远，只要我们认真去对待每一个客户，去珍惜每一次机会，去面对每一次调整，明年第三年肯定会走上属于我们的康庄大道，不然我们就会履行我们的3年之约”不行就散”。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生日</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">36</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/10/08/%E5%86%99%E7%BB%9936%E5%B2%81%E7%9A%84%E6%88%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1215,10 +1227,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">新年</a>
               </li>
              
@@ -1232,6 +1240,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">希望</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
